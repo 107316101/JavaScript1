@@ -1,0 +1,151 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <style type="text/css">
+        #printf {
+            height: 154px;
+            width: 404px;
+        }
+    </style>
+</head>
+     <script>
+         function judge() {
+             var a, b, c, d;
+             a = document.getElementById("name").value;
+             b = document.getElementById("weight").value;
+             c = document.getElementById("height").value;
+
+             if (a == "") {
+                 d = alert("名字不可為空!!!");
+             }
+             if (b == "") {
+                 d = alert("體重不可為空!!!");
+             }
+             if (b == true) {
+                 d = alert("體重須為數字!!!");
+             }
+             if (b <= 0) {
+                 d = alert("體重不可為負!!!");
+             }
+             if (c == "") {
+                 d = alert("身高不可為空!!!");
+             }
+             if (c == true) {
+                 d = alert("身高需為數字!!!");
+             }
+             if (c <= 0) {
+                 d = alert("身高不可為負!!!");
+             }
+             if (c > 3) {
+                 d = alert("身高單位須為公尺!!!");
+             }
+         }
+         function judgetime() {
+             var a = document.getElementsByName("Availabletime");
+             var y = new Array();
+             for (i = 0; i < a.length; i++) {
+                 if (a[i].checked == true) {
+                     y.push(a[i].value);
+                 }
+             }
+             str = "";
+             for (i = 0; i < y.length; i++) {
+
+                 str += "<tr><td>" + y[i] + "</td></tr>";
+             }
+             document.getElementById("printf").innerHTML = str;
+         }
+         function get() {
+             var n, w, h, bmi, g, G, gv, BN, AT, s = " ";
+             var a = document.getElementsByName("Availabletime");
+             var y = new Array();
+             for (i = 0; i < a.length; i++) {
+                 if (a[i].checked == true) {
+                     y.push(a[i].value);
+                 }
+             }
+             for (i = 0; i < y.length; i++) {
+                 s += "\n" + y[i];
+             }
+             n = document.getElementById("name").value;
+             w = document.getElementById("weight").value;
+             h = document.getElementById("height").value;
+             g = document.getElementById("gm").checked;
+             G = document.getElementById("gf").checked;
+             BN = document.getElementById("selectID").value;
+             bmi = document.getElementById("weight").value / document.getElementById("height").value / document.getElementById("height").value;
+             if (g == true)
+             { gv = document.getElementById("gm").value; }
+             else
+             { gv = document.getElementById("gf").value; }
+             alert("名字：" + n + "\n" + "體重：" + w + "\n" + "身高：" + h + "\n" + "BMI：" + bmi + "\n" + "性別：" + gv + "\n" + "科別：" + BN + "\n" + "可就診時間：" + s + "\n");
+         }
+    </script>
+<body>
+  <form action="http://203.64.84.113/x/RQ_RS.aspx"method="post">
+  <b><font face="DFKai-sb"><font size="6">線上掛號</font></b>
+
+  <br/><br/>名字:
+  <input type="text" name="pateintName" value="Mickey" id="name">  <br><br>
+
+ 性別:
+  <input type="radio" name="gender" value="male" id="gm" checked> Male
+  <input type="radio" name="gender" value="female" id="gf"/> Female
+  <p><input id="Button2" type="button" value="檢查是否有誤" onclick="return judge()" /></p><br/>
+
+ 體重：<input type="text" id="weight"><br/>
+ 身高：<input type="text" id="height"><br/><br/>
+
+ 是否第一次來就診:
+  <input type="radio" name="first visit" value="Yes" checked>是
+  <input type="radio" name="first visit" value="No"/> 否<br/><br/>
+
+  可就診時間：<br/>
+  <input type="checkbox" name="Availabletime" value="1">星期一早上
+  <input type="checkbox" name="Availabletime" value="2">星期一下午
+  <input type="checkbox" name="Availabletime" value="3">星期一晚上<br/>
+  <input type="checkbox" name="Availabletime" value="4">星期二早上
+  <input type="checkbox" name="Availabletime" value="5">星期二下午
+  <input type="checkbox" name="Availabletime" value="6">星期二晚上<br/>
+  <input type="checkbox" name="Availabletime" value="7">星期三早上
+  <input type="checkbox" name="Availabletime" value="8">星期三下午
+  <input type="checkbox" name="Availabletime" value="9">星期三晚上<br/>
+  <input type="checkbox" name="Availabletime" value="10">星期四早上
+  <input type="checkbox" name="Availabletime" value="11">星期四下午
+  <input type="checkbox" name="Availabletime" value="12">星期四晚上<br/>
+  <input type="checkbox" name="Availabletime" value="13">星期五早上
+  <input type="checkbox" name="Availabletime" value="14">星期五下午
+  <input type="checkbox" name="Availabletime" value="15">星期五晚上<br/>
+  <input type="checkbox" name="Availabletime" value="16">星期六早上
+  <input type="checkbox" name="Availabletime" value="17">星期六下午<br>
+  <p><input id="Button3" type="button" value="判斷有哪些時間可以" onclick="return judgetime()" /></p>
+  <table id="printf" style="border:8px #FFD382 groove;" cellpadding="10" border='0'>
+      </table>
+ 
+   
+      <br/>
+ 
+   
+  <br/>科別：
+  <select id= "selectID" name="BranchName">
+  <script>
+
+      var obj = document.getElementById("selectID");
+      var selectID = new Array("骨科", "婦產科", "小兒科", "復健科", "皮膚科", "腸胃科", "心臟內科", "神經內科", "耳鼻喉科", "一般外科");
+      for (i = 0; i < selectID.length; i++) {
+          var objOption = new Option(selectID[i], selectID[i]);
+          obj.options.add(objOption);
+      }
+    </script>
+ 
+    </select><br/><br/>
+        
+     
+<p><input id="Button4" type="button" value="印出結果" onclick="return get()" /></p><br/>
+    
+</form>  
+  
+</body>
+</html>
